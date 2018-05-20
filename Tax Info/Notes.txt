@@ -1,0 +1,51 @@
+Tax notes
+
+Witholding (W4) - 
+
+Adjusted Gross Income - before deductions like IRA, student loan interest, etc
+Taxable Income - amount to pay tax on
+Tax bracket - do in chunks
+
+Exemptions:  3 cases: exemptions, deductions, credits
+  Exemptions:
+    1 for me
+	1 if wife and filing jointly
+	1 for each dependent 
+	phased out - single at 166K, married at 250K
+  Deductions:
+    standard = 5800 single, 11600 joint (in 2011)
+	or itemized: 
+	   state and local income taxes
+	   ppty tax on home
+	   mortgage interest
+	   charities
+	   out of pocket medical and dental
+	   job search expenses
+	   out of pocket work related like computers and cellphones
+	   home office costs
+  Credits:
+    Hope scholarship, child tax credit, earned income tax
+	
+Taxable interest:
+Tax exempt interest:
+Ordinary dividends:
+Qualified dividends:
+   
+	   
+	   
+Retirement items:
+401k (18500 till age 56, then 24k?)
+IRA (Roth, normal?)
+   total is maxed between sum of both:
+   Roth: (taxed before entry, untaxed on exit) $5500 till 50, then $6500, withdraw able at 59.5 (distributions don't affect AGI)
+      only can contribute (songle,double) if AGI under 116K,183k (131K,193 for partial)
+   Traditional: (not taxed on entry, taxed on exit) able to withdraw 59.5, 
+	   
+	   
+	   
+	   
+      
+	
+
+
+Estimate: State/local/fed taxes

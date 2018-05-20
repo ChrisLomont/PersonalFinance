@@ -1,0 +1,65 @@
+﻿TODO:
+1. compute Medical costs when old
+2. Save/load actors state
+
+
+Personal finance
+
+Personal finance calculator with monte carlo support
+
+Some variables:
+Income: salary (yearly, hourly, weekly, monthly, etc), raises growth (monte carlo normal with mean, sd)
+Income: other (side job, one time, etc)
+Allow multiple incomes, stop at certain ages
+
+Outflow: monthly - car budget, comcast things, car ins, etc., growth rate
+
+Social security
+
+
+Age
+
+Mortgage: principal, rate
+
+Assets: savings, house, other, 401k, growth with mean, sd
+
+
+
+Algorithm:
+Walk each day, schedule items (biweekly, weekly, daily, monthly, etc)
+
+
+Inflows:
+   incomes
+      (job till retirement, social security at some point)
+	  pay to 401k, pay to SS (or compute elsewhere)
+   hypnocube income
+   other incomes
+   add into short savings 
+   move to long term savings
+   
+   Yearly (todo - make by paycheck?): 
+       move pre tax to 401k, elsewhere
+	   update income (job, soc sec) by inflation
+
+Outflows:
+     monthly expenses (break down ? car, entertain, food, housing, etc)
+	 pay debts (loans, house payments)
+	 other recurring (yearly trips, etc)
+
+Yearly:
+   update incomes, ss, others by inflation
+
+Assets:
+    savings and equity
+	401ks
+	house
+
+
+Debts:
+   house
+   shop
+   loan
+
+Total worth
+    real, nominal, breakout to cash, house, illiquid (items, etc)l

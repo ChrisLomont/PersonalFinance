@@ -1,0 +1,159 @@
+﻿<Window x:Class="Lomont.PersonalFinance.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lomont.PersonalFinance"
+        xmlns:vm="clr-namespace:Lomont.PersonalFinance.ViewModel"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        mc:Ignorable="d"
+        Title="Lomont's Personal Finance Calculator v0.2 May 2018" Height="900" Width="1000">
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <vm:RedValueConverter x:Key="RedValueConverter" />
+        <!-- <Style x:Key="RedCellStyle" TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ., Converter={StaticResource RedValueConverter}}" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ., Converter={StaticResource RedValueConverter}}" Value="False">
+                    <Setter Property="Background" Value="Transparent"/>
+                </DataTrigger>
+            </Style.Triggers>
+            --><!--<Setter Property="Background" Value="{Binding . , Converter={StaticResource RedValueConverter} }" />--><!--
+        </Style>-->
+
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row ="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Header="Controls" Grid.Column="0">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Command="{Binding OpenModelCommand}" ToolTip="Open a model file">Open Model</Button>
+                            <Button Command="{Binding ComputeMortgateCommand}" ToolTip="Fill mortgage payments">Compute Mortgage</Button>
+                            <Button Command="{Binding ComputeSocialSecurityCommand}" ToolTip="Compute Social Security Payments">Compute Social Security</Button>
+                            <Button Command="{Binding ExportCsvCommand}" ToolTip="Copy CSV to clipboard">Export CSV</Button>
+                            <CheckBox  IsChecked="{Binding InflationAdjusted}"  ToolTip="Adjust values by inflation">Inflation Adjusted graph</CheckBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock>Random Seed</TextBlock>
+                            <TextBox Text="{Binding RandomSeed}"/>
+                            <Button Command="{Binding RunMonteCarloCommand}" ToolTip="Run Monte Carlo sim">Monte Carlo</Button>
+                            <TextBox Text="{Binding MonteCarloCount}"/>
+                            <TextBlock>percentiles</TextBlock>
+                            <TextBox Width="100" Text="{Binding PercentilesText}"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <ListBox 
+                    ItemsSource="{Binding Variables}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Width="150" Text="{Binding Label}"/>
+                                <TextBox Width="100" Text="{Binding ElementName=slider1, Path=Value, StringFormat={}{0:F2}}"/>
+                                <Slider x:Name="slider1"
+                                Width="400" 
+                                Value="{Binding Value}"
+                                Minimum="{Binding Min}"
+                                Maximum="{Binding Max}"
+                                TickFrequency="{Binding Step}"
+                                    IsSnapToTickEnabled="True"
+                                />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                </DockPanel>
+            </GroupBox>
+            <GroupBox Header="Graph Variables" Grid.Column="1">
+                <DockPanel >
+                    <UniformGrid Columns="2" DockPanel.Dock="Top">
+                        <Button Command="{Binding AddVariableCommand}">Add</Button>
+                        <Button Command="{Binding RemoveVariableCommand}">Remove</Button>
+                    </UniformGrid>
+                <UniformGrid Columns="2">
+                <ListBox 
+                    Height="{Binding Path=ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UniformGrid}}}"
+                    ItemsSource="{Binding GraphVariables}" SelectedItem="{Binding SelectedGraphVariable}"
+                    MouseDoubleClick="GraphVariablesDoubleClick"
+                    />
+                <ListBox 
+                    Height="{Binding Path=ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UniformGrid}}}"
+                    ItemsSource="{Binding BoundGraphVariables}" SelectedItem="{Binding SelectedBoundGraphVariable}"
+                    MouseDoubleClick="BoundGraphVariablesDoubleClick"
+                    />
+                    </UniformGrid>
+                    </DockPanel>
+            </GroupBox>
+            <lvc:CartesianChart Grid.Column="2" Series="{Binding SeriesCollection}" LegendLocation="Right" >
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Value" LabelFormatter="{Binding YFormatter}"/>
+                </lvc:CartesianChart.AxisY>
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Year+ages" Labels="{Binding Labels}"/>
+                </lvc:CartesianChart.AxisX>
+            </lvc:CartesianChart>
+        </Grid>
+        <DataGrid 
+            Grid.Row="1" 
+            ItemsSource="{Binding FinanceTable}"
+            >
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="DataGridCell.Background">
+                        <Setter.Value>
+                            <MultiBinding Converter="{StaticResource RedValueConverter}">
+                                <MultiBinding.Bindings>
+                                    <Binding RelativeSource="{RelativeSource Self}"/>
+                                    <Binding Path="Row" Mode="OneWay"/>
+                                </MultiBinding.Bindings>
+                            </MultiBinding>
+                        </Setter.Value>
+                    </Setter>
+                    <!--<Style.Triggers>
+                        <DataTrigger Binding="{Binding  Converter={StaticResource RedValueConverter}}" Value="True">
+                            <Setter Property="Background" Value="Red"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding  Converter={StaticResource RedValueConverter}}" Value="False">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </DataTrigger>
+                    </Style.Triggers>-->
+                </Style>
+            </DataGrid.CellStyle>
+            <!--CellStyle="{StaticResource RedCellStyle}"-->
+            <!--<DataGrid.ColumnHeaderStyle>
+                
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Width="50"/>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>-->
+        </DataGrid>
+    </Grid>
+    <!--<TabItem Header="Savings"></TabItem>
+                <TabItem Header="Investments"></TabItem>
+                <TabItem Header="Mortgage"></TabItem>
+                <TabItem Header="Recurring goals"></TabItem>
+                <TabItem Header="Non-recurring goals"></TabItem>
+                <TabItem Header="Life-Insurance"></TabItem>
+                <TabItem Header="Retirement"></TabItem>
+                <TabItem Header="Report"></TabItem>
+                <TabItem Header="TODO"></TabItem>-->
+</Window>

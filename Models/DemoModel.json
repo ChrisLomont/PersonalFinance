@@ -1,0 +1,190 @@
+{
+  "Version": "1.0",
+  "StartYear": 2018.0,
+  "CurrentYear": 2018.0,
+  "NumYears": 80.0,
+  "Rates": [
+    {
+      "Parameters": [
+        0.095,
+        0.197
+      ],
+      "Name": "Stockmarket rate",
+      "RateDistribution": "NormalDistribution"
+    },
+    {
+      "Parameters": [
+        0.03,
+        0.013
+      ],
+      "Name": "Inflation rate",
+      "RateDistribution": "InflationModel"
+    },
+    {
+      "Parameters": [
+        0.0,
+        0.0
+      ],
+      "Name": "No growth rate",
+      "RateDistribution": "NormalDistribution"
+    }
+  ],
+  "Actors": [
+    {
+      "Name": "Bob",
+      "Age": 28.0,
+      "RetirementAge": 70.0,
+      "Take401KAge": 70.0,
+      "SocialSecurityAge": 70.0,
+      "YearlyWages": [
+        24967.0,
+        32764.0,
+        45000.0,
+        55000.0,
+        59654.0,
+        60123.0,
+        61123.0,
+        62123.0,
+        63123.0,
+        64123.0
+      ],
+      "WageStartYear": 2007,
+      "AgeAtStartYear": 18,
+      "AnnualWageIncome": 64123.0,
+      "MonthlySocialSecurityIncome": 2685.0,
+      "AnnualOtherTaxableIncome": 2500.0,
+      "AnnualOtherUntaxableIncome": 0.0,
+      "Annual401KContribution": 10000.0,
+      "MonthlyExpenses": 1500.0,
+      "AnnualOtherExpenses": 5000.0,
+      "DesiredCashOnHand": 2000.0,
+      "Assets": [
+        {
+          "Name": "Cash",
+          "AssetType": "Cash",
+          "Value": 5000.0,
+          "RateName": "No growth rate"
+        },
+        {
+          "Name": "Taxable Investments",
+          "AssetType": "Taxable",
+          "Value": 10000.0,
+          "RateName": "Stockmarket rate"
+        },
+        {
+          "Name": "Retirement401K",
+          "AssetType": "Retirement401K",
+          "Value": 50000.0,
+          "RateName": "Stockmarket rate"
+        },
+        {
+          "Name": "Item Asset",
+          "AssetType": "Items",
+          "Value": 2000.0,
+          "RateName": "No growth rate"
+        },
+        {
+          "Name": "House",
+          "AssetType": "House",
+          "Value": 150000.0,
+          "RateName": "Inflation rate"
+        }
+      ],
+      "Debts": [
+        {
+          "Name": "Mortgage",
+          "DebtType": "Mortgage",
+          "Principal": 130000.0,
+          "AnnualRate": 0.06,
+          "Payments": 360.0,
+          "MonthlyPayment": 1073.64
+        }
+      ]
+    },
+    {
+      "Name": "Sue",
+      "Age": 28.0,
+      "RetirementAge": 70.0,
+      "Take401KAge": 70.0,
+      "SocialSecurityAge": 70.0,
+      "YearlyWages": [
+        12000.0,
+        13000.0,
+        24967.0,
+        32764.0,
+        45000.0,
+        55000.0,
+        59654.0,
+        60123.0,
+        61123.0,
+        62123.0,
+        63123.0,
+        64123.0
+      ],
+      "WageStartYear": 2005,
+      "AgeAtStartYear": 16,
+      "AnnualWageIncome": 64123.0,
+      "MonthlySocialSecurityIncome": 2400.0,
+      "AnnualOtherTaxableIncome": 0.0,
+      "AnnualOtherUntaxableIncome": 0.0,
+      "Annual401KContribution": 13000.0,
+      "MonthlyExpenses": 1200.0,
+      "AnnualOtherExpenses": 0.0,
+      "DesiredCashOnHand": 2000.0,
+      "Assets": [
+        {
+          "Name": "Cash",
+          "AssetType": "Cash",
+          "Value": 3000.0,
+          "RateName": "No growth rate"
+        },
+        {
+          "Name": "Taxable Investments",
+          "AssetType": "Taxable",
+          "Value": 0.0,
+          "RateName": "Stockmarket rate"
+        },
+        {
+          "Name": "Retirement401K",
+          "AssetType": "Retirement401K",
+          "Value": 120000.0,
+          "RateName": "Stockmarket rate"
+        }
+      ],
+      "Debts": [
+        {
+          "Name": "Car Loan",
+          "DebtType": "Loan",
+          "Principal": 13000.0,
+          "AnnualRate": 0.11,
+          "Payments": 100.0,
+          "MonthlyPayment": 285.0
+        },
+        {
+          "Name": "Loans1",
+          "DebtType": "Loan",
+          "Principal": 15000.0,
+          "AnnualRate": 0.035,
+          "Payments": 100.0,
+          "MonthlyPayment": 22.0
+        },
+        {
+          "Name": "Loans2",
+          "DebtType": "Loan",
+          "Principal": 48000.0,
+          "AnnualRate": 0.065,
+          "Payments": 100.0,
+          "MonthlyPayment": 500.0
+        },
+        {
+          "Name": "CreditCards",
+          "DebtType": "Loan",
+          "Principal": 10000.0,
+          "AnnualRate": 0.16,
+          "Payments": 100.0,
+          "MonthlyPayment": 300.0
+        }
+      ]
+    }
+  ]
+}
